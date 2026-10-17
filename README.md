@@ -9,7 +9,8 @@ Aplicação em **Node.js, Express e MySQL/PostgreSQL** com:
 
 ## Como acessar o painel no deploy de demonstração
 
-Acesse [Aqui](https://chat-legal.vercel.app/)
+Acesse [Aqui](https://chat-legal.vercel.app/)   
+
 Para acessar o chat: crie um usuário e faça login (sem reutilizar senhas reais!)
 Para acessar o painel de administrador utilize as credenciais:
 ```bash
