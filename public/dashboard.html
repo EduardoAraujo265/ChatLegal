@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/img/marca.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/app.css">
+  <title>Usuários - ChatLegal</title>
+</head>
+<body>
+  <div class="aviso-scripts" role="alert">
+    <strong>Os scripts desta página não carregaram.</strong>
+    <span>Sem eles esta página não funciona. Atualize com Ctrl+F5; se continuar assim, abra o Console do navegador (F12) e envie a mensagem de erro.</span>
+    <span class="aviso-scripts__detalhe"></span>
+  </div>
+  <header class="topo">
+    <a class="marca" href="/chat"><img src="/img/marca.svg" alt="" width="32" height="32"><span class="marca__nome">CRUD Node</span></a>
+    <nav class="topo__nav" aria-label="Principal">
+      <a href="/chat">Chat</a>
+      <a href="/dashboard" aria-current="page" data-somente-admin hidden>Usuários</a>
+    </nav>
+    <div class="topo__usuario" id="usuario" hidden>
+      <span id="usuarioAvatar"></span>
+      <span class="topo__nome" id="usuarioNome"></span>
+      <span class="selo selo--admin" id="usuarioPapel" hidden>admin</span>
+      <button class="btn btn--fantasma btn--pequeno" id="sair" type="button">Sair</button>
+    </div>
+  </header>
+  <noscript><p class="aviso-noscript">Ative o JavaScript do navegador para usar esta página.</p></noscript>
+  <main class="painel">
+    <div class="painel__topo">
+      <div>
+        <h1>Usuários</h1>
+        <p>Gerencie contas, papéis e acessos.</p>
+      </div>
+      <button class="btn" id="novo" type="button">Novo usuário</button>
+    </div>
+
+    <form class="filtros" id="filtros" method="get" action="/dashboard" role="search" aria-label="Filtrar usuários" autocomplete="off">
+      <div class="campo">
+        <label class="campo__rotulo" for="filtroNome">Nome</label>
+        <input class="entrada" id="filtroNome" name="nome" type="search" placeholder="Buscar por nome">
+      </div>
+      <div class="campo">
+        <label class="campo__rotulo" for="filtroEmail">E-mail</label>
+        <input class="entrada" id="filtroEmail" name="email" type="search" placeholder="Buscar por e-mail" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="campo">
+        <label class="campo__rotulo" for="filtroTelefone">Telefone</label>
+        <input class="entrada" id="filtroTelefone" name="telefone" type="search" inputmode="tel" placeholder="Parte do número">
+      </div>
+      <div class="campo">
+        <label class="campo__rotulo" for="filtroPapel">Papel</label>
+        <select class="entrada" id="filtroPapel" name="papel">
+          <option value="">Todos</option>
+          <option value="usuario">Usuário</option>
+          <option value="admin">Administrador</option>
+        </select>
+      </div>
+      <button class="btn btn--secundario" id="limpar" type="button" hidden>Limpar filtros</button>
+    </form>
+
+    <div class="tabela-wrap">
+      <table class="tabela" id="tabela" aria-describedby="resumo">
+        <thead>
+          <tr>
+            <th scope="col" aria-sort="none"><button class="ordenar" type="button" data-ordem="nome">Nome</button></th>
+            <th scope="col" aria-sort="none"><button class="ordenar" type="button" data-ordem="email">E-mail</button></th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Papel</th>
+            <th scope="col" aria-sort="none"><button class="ordenar" type="button" data-ordem="criado">Cadastro</button></th>
+            <th scope="col" class="acoes"><span class="so-leitor">Ações</span></th>
+          </tr>
+        </thead>
+        <tbody id="corpo"></tbody>
+      </table>
+    </div>
+
+    <div class="paginacao">
+      <p class="paginacao__resumo" id="resumo" aria-live="polite"></p>
+      <nav aria-label="Paginação"><ul class="paginacao__lista" id="paginas"></ul></nav>
+      <div class="paginacao__tamanho">
+        <label for="limite">Por página</label>
+        <select class="entrada" id="limite">
+          <option>10</option>
+          <option>25</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="modal" id="dialogoUsuario" aria-labelledby="tituloUsuario">
+    <div class="modal__corpo">
+      <h2 class="modal__titulo" id="tituloUsuario">Novo usuário</h2>
+      <form class="form" id="formUsuario" method="post" action="/usuarios" novalidate>
+        <div class="form__erro" id="erro-geral" role="alert"></div>
+
+        <div class="campo">
+          <label class="campo__rotulo" for="usuarioNomeCampo">Nome</label>
+          <input class="entrada" id="usuarioNomeCampo" name="nome" type="text" maxlength="498" autocomplete="off">
+          <span class="campo__erro" id="erro-nome"></span>
+        </div>
+
+        <div class="campo">
+          <label class="campo__rotulo" for="usuarioEmail">E-mail</label>
+          <input class="entrada" id="usuarioEmail" name="email" type="email" autocomplete="off" autocapitalize="none" spellcheck="false">
+          <span class="campo__erro" id="erro-email"></span>
+        </div>
+
+        <div class="grade-2">
+          <div class="campo">
+            <label class="campo__rotulo" for="usuarioTelefone">Telefone <span class="campo__opcional">(opcional)</span></label>
+            <input class="entrada" id="usuarioTelefone" name="telefone" type="tel" autocomplete="off" placeholder="(21) 99999-9999">
+            <span class="campo__erro" id="erro-telefone"></span>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="usuarioPapelCampo">Papel</label>
+            <select class="entrada" id="usuarioPapelCampo" name="papel">
+              <option value="usuario">Usuário</option>
+              <option value="admin">Administrador</option>
+            </select>
+            <span class="campo__ajuda" id="ajuda-papel" hidden>Você não pode alterar o próprio papel.</span>
+            <span class="campo__erro" id="erro-papel"></span>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label class="campo__rotulo" for="usuarioSenha" id="rotuloSenha">Senha</label>
+          <input class="entrada" id="usuarioSenha" name="senha" type="password" autocomplete="new-password" aria-describedby="ajuda-senha">
+          <span class="campo__ajuda" id="ajuda-senha">Mínimo de 8 caracteres.</span>
+          <span class="campo__erro" id="erro-senha"></span>
+        </div>
+
+        <div class="modal__acoes">
+          <button class="btn btn--secundario" type="button" id="cancelarUsuario">Cancelar</button>
+          <button class="btn" type="submit" id="salvarUsuario">Criar usuário</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="dialogoExcluir" aria-labelledby="tituloExcluir">
+    <div class="modal__corpo">
+      <h2 class="modal__titulo" id="tituloExcluir">Excluir usuário</h2>
+      <p class="modal__texto" id="textoExcluir"></p>
+      <div class="modal__acoes">
+        <button class="btn btn--secundario" type="button" id="cancelarExcluir">Cancelar</button>
+        <button class="btn btn--perigo" type="button" id="confirmarExcluir">Excluir usuário</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script defer src="/js/usuarios.js"></script>
+</body>
+</html>

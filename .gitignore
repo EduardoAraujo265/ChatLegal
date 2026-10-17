@@ -1,0 +1,15 @@
+# Credenciais e segredos
+.env
+
+# Dependências
+node_modules
+
+# Deploy
+.vercel
+
+# Logs
+npm-debug.log*
+*.log
+
+#Readme privado do autor do projeto
+readmesecreto.md

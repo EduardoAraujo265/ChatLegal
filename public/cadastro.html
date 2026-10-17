@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/img/marca.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/app.css">
+  <title>Criar conta - ChatLegal</title>
+</head>
+<body>
+  <div class="aviso-scripts" role="alert">
+    <strong>Os scripts desta página não carregaram.</strong>
+    <span>O formulário continua funcionando, mas sem as mensagens ao lado de cada campo. Se isso persistir, atualize a página com Ctrl+F5.</span>
+    <span class="aviso-scripts__detalhe"></span>
+  </div>
+  <div class="auth">
+    <aside class="auth__marca">
+      <a class="marca" href="/"><img src="/img/marca.svg" alt="" width="32" height="32">ChatLegal</a>
+      <div>
+        <p class="auth__frase">Crie sua conta e entre na conversa.</p>
+        <p class="auth__apoio">Leva menos de um minuto. Depois do cadastro você já entra no chat.</p>
+      </div>
+    </aside>
+
+    <main class="auth__painel">
+      <div class="auth__conteudo">
+        <h1>Criar conta</h1>
+        <p class="auth__ajuda">Preencha os dados abaixo.</p>
+
+        <form id="form" class="form" method="post" action="/auth/cadastro" novalidate>
+          <div class="form__erro" id="erro-geral" role="alert"><!--ERRO_SERVIDOR--></div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="nome">Nome</label>
+            <input class="entrada" id="nome" name="nome" type="text" autocomplete="name" maxlength="498" autofocus>
+            <span class="campo__erro" id="erro-nome"></span>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="email">E-mail</label>
+            <input class="entrada" id="email" name="email" type="email" autocomplete="username" autocapitalize="none" spellcheck="false">
+            <span class="campo__erro" id="erro-email"></span>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="telefone">Telefone <span class="campo__opcional">(opcional)</span></label>
+            <input class="entrada" id="telefone" name="telefone" type="tel" autocomplete="tel-national" inputmode="tel" placeholder="(21) 99999-9999">
+            <span class="campo__erro" id="erro-telefone"></span>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="senha">Senha</label>
+            <input class="entrada" id="senha" name="senha" type="password" autocomplete="new-password" aria-describedby="ajuda-senha">
+            <span class="campo__ajuda" id="ajuda-senha">Mínimo de 8 caracteres.</span>
+            <span class="campo__erro" id="erro-senha"></span>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="confirmarSenha">Repita a senha</label>
+            <input class="entrada" id="confirmarSenha" name="confirmarSenha" type="password" autocomplete="new-password">
+            <span class="campo__erro" id="erro-confirmarSenha"></span>
+          </div>
+
+          <button class="btn btn--largo" type="submit">Criar conta</button>
+        </form>
+
+        <p class="auth__troca">Já tem uma conta? <a href="/login">Entrar</a></p>
+      </div>
+    </main>
+  </div>
+  <script defer src="/js/criar-conta.js"></script>
+</body>
+</html>

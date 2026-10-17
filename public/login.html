@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/img/marca.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/app.css">
+  <title>Entrar - ChatLegal</title>
+</head>
+<body>
+  <div class="aviso-scripts" role="alert">
+    <strong>Os scripts desta página não carregaram.</strong>
+    <span>O formulário continua funcionando, mas sem as mensagens ao lado de cada campo. Se isso persistir, atualize a página com Ctrl+F5.</span>
+    <span class="aviso-scripts__detalhe"></span>
+  </div>
+  <div class="auth">
+    <aside class="auth__marca">
+      <a class="marca" href="/"><img src="/img/marca.svg" alt="" width="32" height="32">ChatLegal</a>
+      <div>
+        <p class="auth__frase">Converse com a turma e mantenha os cadastros em dia.</p>
+        <p class="auth__apoio">Um chat para todas as contas e um painel com busca, filtros e paginação para quem administra.</p>
+      </div>
+    </aside>
+
+    <main class="auth__painel">
+      <div class="auth__conteudo">
+        <h1>Entrar</h1>
+        <p class="auth__ajuda">Use o e-mail e a senha da sua conta.</p>
+
+        <form id="form" class="form" method="post" action="/auth/login" novalidate>
+          <div class="form__erro" id="erro-geral" role="alert"><!--ERRO_SERVIDOR--></div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="email">E-mail</label>
+            <input class="entrada" id="email" name="email" type="email" autocomplete="username" autocapitalize="none" spellcheck="false" autofocus>
+            <span class="campo__erro" id="erro-email"></span>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="senha">Senha</label>
+            <input class="entrada" id="senha" name="senha" type="password" autocomplete="current-password">
+            <span class="campo__erro" id="erro-senha"></span>
+          </div>
+
+          <button class="btn btn--largo" type="submit">Entrar</button>
+        </form>
+
+        <p class="auth__troca">Ainda não tem conta? <a href="/cadastro">Criar conta</a></p>
+      </div>
+    </main>
+  </div>
+  <script defer src="/js/entrar.js"></script>
+</body>
+</html>

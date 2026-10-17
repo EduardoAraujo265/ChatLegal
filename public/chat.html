@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/img/marca.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/app.css">
+  <title>Chat - ChatLegal</title>
+</head>
+<body>
+  <div class="aviso-scripts" role="alert">
+    <strong>Os scripts desta página não carregaram.</strong>
+    <span>Sem eles esta página não funciona. Atualize com Ctrl+F5; se continuar assim, abra o Console do navegador (F12) e envie a mensagem de erro.</span>
+    <span class="aviso-scripts__detalhe"></span>
+  </div>
+  <header class="topo">
+    <a class="marca" href="/chat"><img src="/img/marca.svg" alt="" width="32" height="32"><span class="marca__nome">ChatLegal</span></a>
+    <nav class="topo__nav" aria-label="Principal">
+      <a href="/chat" aria-current="page">Chat</a>
+      <a href="/dashboard" data-somente-admin hidden>Usuários</a>
+    </nav>
+    <div class="topo__usuario" id="usuario" hidden>
+      <span id="usuarioAvatar"></span>
+      <span class="topo__nome" id="usuarioNome"></span>
+      <span class="selo selo--admin" id="usuarioPapel" hidden>admin</span>
+      <button class="btn btn--fantasma btn--pequeno" id="sair" type="button">Sair</button>
+    </div>
+  </header>
+  <noscript><p class="aviso-noscript">Ative o JavaScript do navegador para usar esta página.</p></noscript>
+  <main class="chat">
+    <div class="chat__cabecalho">
+      <h1>Sala geral</h1>
+      <p>Todas as contas participam desta conversa.</p>
+    </div>
+
+    <div class="chat__aviso" id="aviso" role="status" hidden>Sem conexão. Tentando de novo…</div>
+
+    <ol class="mensagens" id="mensagens" tabindex="0" aria-label="Mensagens" aria-live="polite" aria-relevant="additions" aria-busy="true"></ol>
+    <p class="chat__vazio" id="vazio" hidden>Ainda não há mensagens. Escreva a primeira.</p>
+
+    <button class="chat__novas" id="novas" type="button" hidden>Novas mensagens</button>
+
+    <form class="compositor" id="compositor" method="post" action="/mensagens" autocomplete="off">
+      <label class="so-leitor" for="texto">Mensagem</label>
+      <textarea class="entrada" id="texto" rows="1" maxlength="1000" placeholder="Escreva uma mensagem" enterkeyhint="send"></textarea>
+      <button class="btn" id="enviar" type="submit" aria-label="Enviar mensagem" disabled>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 11.5 21 3l-7.5 18-2.5-7.5L3 11.5z" fill="currentColor"/></svg>
+        <span>Enviar</span>
+      </button>
+      <p class="compositor__contador" id="contador" hidden></p>
+    </form>
+  </main>
+
+  <script defer src="/js/sala.js"></script>
+</body>
+</html>

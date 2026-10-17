@@ -1,0 +1,37 @@
+{
+  "name": "crud-nodejs",
+  "version": "3.0.0",
+  "description": "Painel de usuários (CRUD com filtros e paginação) e chat, com Node.js, Express e MySQL/PostgreSQL",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "build:web": "node scripts/buildWeb.js",
+    "setup": "node scripts/setup.js",
+    "db:init": "node scripts/createTables.js",
+    "db:seed": "node scripts/seed.js",
+    "create-admin": "node scripts/createAdmin.js",
+    "hash-password": "node scripts/hashPassword.js",
+    "test": "node --test --test-concurrency=1"
+  },
+  "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.24.6",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "nodemon": "^3.1.14"
+  }
+}
